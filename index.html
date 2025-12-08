@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Newton's Hardware Journey</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gl1tch//hwlog | Hardware Security Journey</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+
     <header>
-        <h1>CybrZila's Hardware Journey</h1>
+        <div class="glitch" data-text="gl1tch//hwlog">gl1tch//hwlog</div>
+        <p>Hardware Security | Reverse Engineering | Low-Level Shenanigans</p>
         <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <a href="#">Posts</a>
+            <a href="#">Tools</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
         </nav>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello, I'm a cybersecurity professional pivoting into the exciting world of hardware. With a background in secure coding and system-level security, I'm now exploring embedded systems, microcontrollers, and hardware security. Follow my journey as I build projects, learn new skills, and bridge the gap between software and hardware!</p>
-    </section>
+    <main>
 
-    <section id="blog">
-        <h2>Blog Posts</h2>
-        <article class="blog-post">
-            <h3>My First Hardware Project: Building a Secure IoT Sensor</h3>
-            <p class="date">October 10, 2025</p>
-            <p>Starting my hardware journey, I built a secure IoT sensor using an Arduino and implemented encrypted communication. Here's how I combined my cybersecurity expertise with hardware to prevent data breaches...</p>
-            <a href="#" class="read-more">Read More</a>
+        <article>
+            <h2>Post #001 – First Blood on a Router</h2>
+            <div class="date">2025-12-04 // 23:59</div>
+            <p>
+                Finally dumped the firmware of that dusty TP-Link router with a $10 bus pirate clone. 
+                JTAG pins were hiding under a silkscreen blob labeled “DO NOT POPULATE”. Classic.
+            </p>
+            <div class="terminal">
+$ openocd -f interface/buspirate.cfg -f target/tplink.cfg<br>
+&gt; dump_image firmware.bin 0x9f000000 0x800000
+            </div>
+            <p>Next step: binwalk + ghidra + caffeine overdose.</p>
+            <a href="#" class="neon-button">Read more →</a>
         </article>
-        <article class="blog-post">
-            <h3>Learning Verilog: My First FPGA Design</h3>
-            <p class="date">October 15, 2025</p>
-            <p>Diving into hardware description languages, I designed a simple logic circuit using Verilog. This post covers my challenges, lessons learned, and how my cybersecurity background helped secure the design...</p>
-            <a href="#" class="read-more">Read More</a>
-        </article>
-    </section>
 
-    <footer id="contact">
-        <h2>Contact</h2>
-        <p>Connect with me on <a href="https://linkedin.com/in/robert-newton" target="_blank">LinkedIn</a> or <a href="https://x.com/cybrzila" target="_blank">X</a>.</p>
-        <p>&copy; 2025 CybrZila. All rights reserved.</p>
+        <article>
+            <h2>Post #000 – Why Hardware?</h2>
+            <div class="date">2025-11-28 // 03:17</div>
+            <p>
+                Software bugs get patched. Hardware bugs stay forever. 
+                That’s the beauty of it. Once you understand the silicon, you own the device for life.
+            </p>
+            <p>My lab now contains more oscilloscopes than coffee mugs. Send help.</p>
+            <a href="#" class="neon-button">Read more →</a>
+        </article>
+
+        <!-- Add new posts here (newest on top) -->
+
+    </main>
+
+    <footer>
+        <p>© 2025 gl1tch//hwlog — soldered with ♥ in a dark room full of RGB</p>
+        <p>
+            <i class="fab fa-github"></i> github.com/cybrzila | 
+            <i class="fab fa-twitter"></i> @cybrzila
+        </p>
     </footer>
+
 </body>
 </html>
