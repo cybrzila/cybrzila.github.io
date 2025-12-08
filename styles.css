@@ -1,143 +1,189 @@
-/* Reset default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --neon-pink: #ff00ff;
+    --neon-cyan: #00ffff;
+    --dark: #0d0d0d;
+    --darker: #050505;
+    --glitch-1: #ff00ff44;
+    --glitch-2: #00ffff44;
 }
 
-/* General styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    background: var(--dark);
+    color: var(--neon-cyan);
+    font-family: 'Courier New', monospace;
+    line-height: 1.7;
+    min-height: 100vh;
+    position: relative;
 }
 
-/* Header */
+/* Scanlines overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,255,255,0.03) 2px,
+        rgba(0,255,255,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Glitch text effect */
+.glitch {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    color: var(--neon-cyan);
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+
+.glitch::before {
+    animation: glitch-1 2s infinite linear alternate-reverse;
+    color: var(--neon-pink);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-2px, -2px);
+}
+
+.glitch::after {
+    animation: glitch-2 3s infinite linear alternate-reverse;
+    color: var(--neon-cyan);
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px);
+}
+
+@keyframes glitch-1 {
+    0%,100% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(-5px, -5px); }
+    60% { transform: translate(5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+}
+
+@keyframes glitch-2 {
+    0%,100% { transform: translate(0); }
+    20% { transform: translate(5px, -5px); }
+    40% { transform: translate(5px, 5px); }
+    60% { transform: translate(-5px, -5px); }
+    80% { transform: translate(-5px, 5px); }
+}
+
 header {
-    background-color: #2c3e50;
-    color: white;
+    background: rgba(5,5,5,0.95);
+    border-bottom: 2px solid var(--neon-pink);
+    padding: 2rem 1rem;
     text-align: center;
-    padding: 2rem;
+    text-shadow: 0 0 10px var(--neon-cyan);
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+header p {
+    margin: 1rem 0;
+    opacity: 0.9;
 }
 
 nav a {
-    color: white;
+    color: var(--neon-cyan);
     text-decoration: none;
-    font-weight: bold;
+    margin: 0 1.2rem;
+    font-size: 1.1rem;
+    position: relative;
 }
 
-nav a:hover {
-    color: #3498db;
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -6px;
+    left: 0;
+    background: var(--neon-pink);
+    transition: width 0.4s;
 }
 
-/* About Section */
-#about {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+nav a:hover::after { width: 100%; }
+
+main {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1rem;
 }
 
-#about h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #2c3e50;
+article {
+    background: rgba(10,10,15,0.8);
+    border: 1px solid var(--neon-cyan);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 0 25px var(--glitch-2);
+    backdrop-filter: blur(4px);
 }
 
-/* Blog Section */
-#blog {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
-
-#blog h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: #2c3e50;
-}
-
-.blog-post {
-    background-color: white;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.blog-post h3 {
-    font-size: 1.5rem;
-    color: #2c3e50;
+article h2 {
+    color: var(--neon-pink);
+    font-size: 2rem;
     margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px var(--neon-pink);
 }
 
 .date {
+    color: #888;
     font-size: 0.9rem;
-    color: #7f8c8d;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
 }
 
-.read-more {
+.terminal {
+    background: #000;
+    color: #0f0;
+    padding: 1.2rem;
+    border: 1px dashed var(--neon-cyan);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+}
+
+.neon-button {
     display: inline-block;
-    margin-top: 0.5rem;
-    color: #3498db;
+    padding: 0.8rem 1.6rem;
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
     text-decoration: none;
+    margin-top: 1rem;
+    transition: all 0.4s;
     font-weight: bold;
 }
 
-.read-more:hover {
-    text-decoration: underline;
+.neon-button:hover {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 25px var(--neon-pink);
+    transform: translateY(-2px);
 }
 
-/* Footer */
 footer {
-    background-color: #2c3e50;
-    color: white;
     text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
+    padding: 4rem 1rem 2rem;
+    border-top: 1px dashed var(--neon-pink);
+    color: #666;
+    font-size: 0.9rem;
 }
 
-footer a {
-    color: #3498db;
-    text-decoration: none;
-}
+footer i { margin: 0 0.5rem; }
 
-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive Design */
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 1.8rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    #about, #blog {
-        padding: 0.5rem;
-    }
-
-    .blog-post h3 {
-        font-size: 1.3rem;
-    }
+    .glitch { font-size: 2.2rem; }
+    nav a { display: block; margin: 0.8rem 0; }
 }
